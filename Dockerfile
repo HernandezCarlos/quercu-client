@@ -1,4 +1,4 @@
-# Base image
+# Stage 1: Build the Angular application
 FROM node:18 AS build
 
 # Set the working directory
@@ -20,11 +20,12 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy built assets from builder stage to nginx public folder
-COPY --from=build /app/dist/property-management/browser /usr/share/nginx/html
+COPY --from=build /app/dist/your-angular-app-name/browser /usr/share/nginx/html
 
 # Expose port for the nginx server
 EXPOSE 80
 
 # Start nginx and keep the process from backgrounding and the container from quitting
 CMD ["nginx", "-g", "daemon off;"]
+
 
