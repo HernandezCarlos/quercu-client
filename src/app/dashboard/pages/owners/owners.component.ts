@@ -40,8 +40,13 @@ export default class OwnersComponent implements OnInit {
         if (data.length > 0) {
           this.owners = data;
           this.cdr.detectChanges();
+        } else {
+          this.owners = [];
         }
       }, error: err => {
+        this.dialog.open(ErrorModalComponent, {
+          data: 'Hubo un error. Por favor intente mas tarde'
+        });
         console.log(err);
       }
     }

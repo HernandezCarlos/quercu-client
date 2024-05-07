@@ -19,7 +19,7 @@ import { ErrorModalComponent } from '../../../shared/error-modal/error-modal.com
   templateUrl: './property-types.component.html',
   styleUrl: './property-types.component.scss',
 })
-export default class PropertyTypesComponent { 
+export default class PropertyTypesComponent {
   propertyTypes: PropertyType[] = []
   propertyTypeService = inject(PropertyTypeService);
   router = inject(Router);
@@ -37,8 +37,14 @@ export default class PropertyTypesComponent {
         if (data.length > 0) {
           this.propertyTypes = data;
           this.cdr.detectChanges();
+        } else {
+          this.propertyTypes = [];
+          this.cdr.detectChanges();
         }
       }, error: err => {
+        this.dialog.open(ErrorModalComponent, {
+          data: 'Hubo un error. Por favor intente mas tarde'
+        });
         console.log(err);
       }
     }

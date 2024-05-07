@@ -38,8 +38,14 @@ export default class PropertiesComponent {
         if (data.length > 0) {
           this.properties = data;
           this.cdr.detectChanges();
+        } else {
+          this.properties = [];
+          this.cdr.detectChanges();
         }
       }, error: err => {
+        this.dialog.open(ErrorModalComponent, {
+          data: 'Hubo un error. Por favor intente mas tarde'
+        });
         console.log(err);
       }
     }

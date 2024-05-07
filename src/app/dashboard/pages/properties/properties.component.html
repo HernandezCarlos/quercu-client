@@ -3,7 +3,7 @@
     <div class="md:col-span-2 xl:col-span-5">
       <div class="flex-col rounded-lg bg-white px-8 py-8 dark:bg-night-700 sm:flex-row">
           <div class="flex justify-between items-center w-full">
-            <h4 class="mb-4 text-xl font-semibold uppercase">Grupo</h4>
+            <h4 class="mb-4 text-xl font-semibold uppercase">Listado de Propiedades</h4>
             <a routerLink="/dashboard/property-form" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
               Agregar
             </a>
@@ -34,7 +34,7 @@
                   <tr>
                     <td class="whitespace-nowrap px-6 py-4 text-center">{{ property.number }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-center">{{ property.area }}</td>
-    
+
                     <td class="flex whitespace-nowrap px-6 py-4 text-center justify-center">
                       <svg-icon src="assets/icons/outline/pencil-square.svg" [svgClass]="'h-5 w-5'" class="mx-2 cursor-pointer" (click)="updateProperty(property)"></svg-icon>
                       <svg-icon src="assets/icons/outline/trash.svg" [svgClass]="'h-5 w-5'" class="mx-2 cursor-pointer" (click)="deleteProperty(property.id)"></svg-icon>
