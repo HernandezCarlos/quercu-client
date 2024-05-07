@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:prod": "ng build --configuration production",
-    "serve": "serve -s dist/property-management -l tcp://0.0.0.0:${PORT}"
+    "serve": "serve -s dist/property-management/browser -l tcp://0.0.0.0:${PORT}"
   },
   "private": true,
   "dependencies": {
