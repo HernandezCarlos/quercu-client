@@ -1,5 +1,5 @@
 # Base image
-FROM node:18
+FROM node:14 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -16,8 +16,15 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Install a simple HTTP server to serve static content
-RUN npm install -g http-server
+# Stage 2: Serve app with nginx server
+FROM nginx:alpine
 
-# Serve the application on port 8080
-CMD ["http-server", "dist/property-management", "-p", "8080"]
+# Copy built assets from builder stage to nginx public folder
+COPY --from=build /app/dist/property-management/browser /usr/share/nginx/html
+
+# Expose port for the nginx server
+EXPOSE 80
+
+# Start nginx and keep the process from backgrounding and the container from quitting
+CMD ["nginx", "-g", "daemon off;"]
+
