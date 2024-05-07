@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://acmc-backend-production.up.railway.app/api/',
+  apiUrl: 'https://quercu-server-production.up.railway.app/',
 };

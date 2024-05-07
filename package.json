@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "build:prod": "ng build --configuration production",
     "serve": "serve -s dist/property-management -l tcp://0.0.0.0:${PORT}"
   },
   "private": true,
@@ -23,6 +24,7 @@
     "@angular/router": "^17.0.0",
     "angular-svg-icon": "^17.0.0",
     "rxjs": "~7.8.0",
+    "serve": "^14.2.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },
