@@ -1,0 +1,21 @@
+<div class="fixed inset-0 flex h-full w-full items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50">
+  <div class="mx-auto rounded-lg bg-white px-6 py-4 text-center shadow-lg md:max-w-md">
+    <div class="mx-auto my-4 text-green-500">
+      <!-- Checkmark icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="mx-auto h-12 w-12"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+    <h2 class="mb-2 text-xl font-semibold text-gray-800">¡Éxito!</h2>
+    <p class="mb-6 text-gray-600">{{ data?.message }}</p>
+    <button class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700" (click)="redirect(data.route)">
+      OK
+    </button>
+  </div>
+</div>

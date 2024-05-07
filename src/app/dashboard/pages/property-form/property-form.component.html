@@ -1,0 +1,94 @@
+<div class="container mx-auto px-4 py-24">
+  <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <a routerLink="/dashboard/properties"
+       class="mb-6 flex w-min items-center justify-center rounded-md bg-blue-500 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white hover:bg-blue-700 hover:shadow-lg focus:outline-none focus:shadow-lg active:bg-blue-700 cursor-pointer">
+       <svg-icon src="assets/icons/outline/chevron-left.svg" [svgClass]="'h-5 w-5'"></svg-icon>
+      Regresar
+    </a>
+
+    <div class="mb-4">
+      <label for="number" class="block text-gray-700 text-sm font-bold mb-2">Número de Propiedad</label>
+      <input type="text" id="number" placeholder="Número de Propiedad" formControlName="number"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <div *ngIf="propertyForm.get('number')?.errors?.['required'] && propertyForm.get('number')?.touched" 
+           class="text-red-500 text-xs italic">
+        El número de la propiedad es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Dirección</label>
+      <input type="text" id="address" placeholder="Dirección" formControlName="address"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <div *ngIf="propertyForm.get('address')?.errors?.['required'] && propertyForm.get('address')?.touched" 
+           class="text-red-500 text-xs italic">
+        La dirección es obligatoria.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="area" class="block text-gray-700 text-sm font-bold mb-2">Área (m²)</label>
+      <input type="number" id="area" placeholder="Área en metros cuadrados" formControlName="area"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <div *ngIf="propertyForm.get('area')?.errors?.['required'] && propertyForm.get('area')?.touched" 
+           class="text-red-500 text-xs italic">
+        El área de la propiedad es obligatoria.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="constructionArea" class="block text-gray-700 text-sm font-bold mb-2">Área de Construcción (m²)</label>
+      <input type="number" id="constructionArea" placeholder="Área de construcción en metros cuadrados" formControlName="constructionArea"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+
+    <div class="mb-4">
+      <label for="ownerId" class="block text-gray-700 text-sm font-bold mb-2">Propietario</label>
+      <select id="ownerId" formControlName="ownerId" 
+              class="block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+        <option disabled value="">Elige una opción</option>
+        <option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</option>
+      </select>
+      <div *ngIf="propertyForm.get('ownerId')?.errors?.['required'] && propertyForm.get('ownerId')?.touched" 
+           class="text-red-500 text-xs italic">
+        Debe seleccionar un propietario.
+      </div>
+    </div>
+    
+    <div class="mb-4">
+      <label for="propertyTypeId" class="block text-gray-700 text-sm font-bold mb-2">Tipo de Propiedad</label>
+      <select id="propertyTypeId" formControlName="propertyTypeId"
+              class="block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+        <option disabled value="">Elige una opción</option>
+        <option *ngFor="let propertyType of propertyTypes" [value]="propertyType.id">{{ propertyType.description }}</option>
+      </select>
+      <div *ngIf="propertyForm.get('propertyTypeId')?.errors?.['required'] && propertyForm.get('propertyTypeId')?.touched" 
+           class="text-red-500 text-xs italic">
+        Debe seleccionar un tipo de propiedad.
+      </div>
+    </div>
+
+    @if(!property) {
+      <div class="flex justify-center">
+        <button type="submit" [disabled]="propertyForm.invalid || loading"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:opacity-75">
+          Guardar
+        </button>
+      </div>
+    } @else if (property) {
+      <div class="flex justify-center">
+        <button
+          type="button"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:opacity-75"
+          [disabled]="propertyForm.invalid || loading"
+          (click)="updateProperty(property)">
+          Guardar @if(loading) {
+          <i class="fa fa-spinner fa-pulse ml-2 mt-1"></i>
+          }
+        </button>
+      </div>
+    }
+
+
+  </form>
+</div>

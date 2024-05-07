@@ -1,0 +1,33 @@
+<!-- Botón de Hamburguesa visible solo en pantallas pequeñas -->
+<button [ngClass]="isOpen ? 'hidden' : 'block'" class="md:hidden p-4 z-30 fixed top-4 left-4 bg-gray-800 rounded-md shadow-lg text-white" (click)="toggleMenu()">
+  <div class="space-y-2">
+    <span class="block h-0.5 w-8 bg-white"></span>
+    <span class="block h-0.5 w-8 bg-white"></span>
+    <span class="block h-0.5 w-8 bg-white"></span>
+  </div>
+</button>
+
+<!-- Menú Lateral -->
+<div id="menu" [class.open]="isOpen" class="bg-gray-900 min-h-screen z-20 text-slate-300 fixed h-screen overflow-y-auto transform transition-transform duration-300 md:relative md:translate-x-0"
+[class.translate-x-0]="isOpen" [class.-translate-x-full]="!isOpen" style="width: 100%">
+  <div id="logo" class="my-4 px-6">
+    <!-- <h1 class="text-lg md:text-2xl font-bold text-white">Quercu</h1> -->
+    <img class="h-16 w-16" src="http://quercuwebsite.azurewebsites.net/wp-content/uploads/2019/09/logo-quercu-white.png" alt="light logo">
+    <p class="text-slate-500 text-xs">Mantenimiento de Propiedades</p>
+  </div>
+  <div id="profile" class="px-6">
+    <!-- Perfil o contenido adicional aquí -->
+  </div>
+  <div id="nav" class="w-full px-6">
+    <a *ngFor="let item of menuItems; let i = index"
+       [routerLink]="item.path"
+       routerLinkActive="bg-blue-800"
+       class="w-full px-2 inline-flex space-x-2 items-center border-b border-slate-700 py-3 hover:bg-white/5 transition ease-linear duration-150"
+       (click)="closeMenu()">
+      <div class="flex flex-col">
+        <span class="text-lg font-bold leading-5 text-white">{{ item.title }}</span>
+      </div>
+    </a>
+  </div>
+</div>
+

@@ -1,0 +1,91 @@
+<div class="container mx-auto px-4 py-24">
+
+  <form [formGroup]="ownerForm" (ngSubmit)="onSubmit()" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+    <a
+    class="mb-6 flex w-min items-center justify-center rounded-md bg-blue-500 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white hover:bg-primary-600 shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-primary-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-lg cursor-pointer"
+    routerLink="/dashboard/owners">
+    <svg-icon src="assets/icons/outline/chevron-left.svg" [svgClass]="'h-5 w-5'"></svg-icon>
+    Regresar
+  </a>
+
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+      Nombre
+    </label>
+    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="name" type="text" placeholder="Nombre Completo" formControlName="name">
+    <div class="mb-4" *ngIf="ownerForm.get('name')?.invalid && ownerForm.get('name')?.touched">
+      <div class="text-red-500 text-xs italic">El nombre es obligatorio.</div>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="telephone">
+      Teléfono
+    </label>
+    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="telephone" type="text" placeholder="Teléfono" formControlName="telephone">
+    <div class="mb-4" *ngIf="ownerForm.get('telephone')?.invalid && ownerForm.get('telephone')?.touched">
+      <div class="text-red-500 text-xs italic">El teléfono es obligatorio.</div>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+      Email  (Opcional)
+    </label>
+    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="email" type="email" placeholder="Email" formControlName="email">
+    <div class="mb-4" *ngIf="ownerForm.get('email')?.invalid && ownerForm.get('email')?.touched">
+      <div class="text-red-500 text-xs italic">Por favor, ingrese un correo electrónico válido.</div>
+    </div>
+  </div>
+
+   <div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="identificationNumber">
+      Número de Identificación
+    </label>
+    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      id="identificationNumber" type="text" placeholder="Número de Identificación" formControlName="identificationNumber">
+    <div class="mb-4" *ngIf="ownerForm.get('identificationNumber')?.invalid && ownerForm.get('identificationNumber')?.touched">
+      <div class="text-red-500 text-xs italic">El número de identificación es obligatorio.</div>
+    </div>
+   </div>
+
+
+ <div class="mb-4">
+  <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
+    Dirección (Opcional)
+  </label>
+  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+    id="address" type="text" placeholder="Dirección" formControlName="address">
+ </div>
+
+   @if(!owner) {
+    <div class="flex justify-center">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:opacity-75" type="submit" [disabled]="ownerForm.invalid || loading">
+        Guardar
+        @if(loading) {
+          <i class="fa fa-spinner fa-pulse ml-2 mt-1"></i>
+          }
+      </button>
+    </div>
+   }
+    @else if (owner) {
+     <div class="flex justify-center">
+      <button
+      type="button"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:cursor-not-allowed disabled:opacity-75"
+      [disabled]="!ownerForm.valid || loading"
+      (click)="updateOwner(owner)">
+      Guardar @if(loading) {
+      <i class="fa fa-spinner fa-pulse ml-2 mt-1"></i>
+      }
+    </button>
+     </div>
+    }
+ 
+  </form>
+</div>
+
