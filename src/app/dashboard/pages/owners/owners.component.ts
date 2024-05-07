@@ -42,6 +42,7 @@ export default class OwnersComponent implements OnInit {
           this.cdr.detectChanges();
         } else {
           this.owners = [];
+          this.cdr.detectChanges();
         }
       }, error: err => {
         this.dialog.open(ErrorModalComponent, {
